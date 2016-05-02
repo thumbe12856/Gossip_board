@@ -13,8 +13,13 @@ class home extends BaseController
 {
     use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests;
 
-    function index()
+    function login()
     {
         return view('auth/login');
+    }
+
+    function register($status)
+    {
+        return view('auth/register')->with('status', $status);
     }
 }

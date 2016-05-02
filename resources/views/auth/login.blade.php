@@ -34,7 +34,7 @@
                                                 <label for="password">Password</label>
                                             </div>
                                             <div class="card-action center">
-                                                <button type="submit" class="btn btn-warning">Sign in</button>
+                                                <button type="submit" class="btn btn-warning">Sign in<i class="material-icons right">send</i></button>
                                             </div>
                                         </form>
                                     </div>
@@ -46,17 +46,14 @@
 
             </form>
             <div class="center">
-                <a href="{{url('/register')}}">
+                <a href="{{url('/register/0')}}">
                     <span>Sign up</span>
                 </a>
             </div>
         </div>
     </div>
 
-
-
 @endsection
 
 @section("js")
-    <script src="{{url('/assets/js/test.js')}}"></script>
 @endsection

@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{url('/assets/materialize/css/materialize.css')}}" type="text/css">
     @yield("css")
 </head>
-<body>
+<body id="main">
     @yield("content")
 
     <!-- jQuery -->

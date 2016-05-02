@@ -29,20 +29,30 @@ class authController extends Controller
         $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
     }
 
-    public function register()
+    public function getAccount()
     {
-        $account_data['account'] = 'test';
-        $account_data['name'] = 'TEST';
-        $account_data['password'] = bcrypt('test');
-        return DB::table('users')->insertGetId($account_data);
+        $data = DB::table('users')->lists('account');
+        return $data;
     }
 
-    public function logout()
+
+    public function register(Request $request)
     {
-        Auth::logout();
-        session()->flush();
-        //return redirect()->route('/');
+        $list_account = authController::getAccount();
+        $isExist = array_search($request->input('account'), $list_account);
+
+        if($request->input('password') != $request->input('confirm_password')
+            || $request->input('password') == ""
+            || $isExist !== FALSE) {
+            return Redirect::to('/register/1');
+        }
+
+        $account_data['account'] = $request->input('account');
+        $account_data['name'] = $request->input('name');
+        $account_data['password'] = bcrypt($request->input('password'));
+        DB::table('users')->insert($account_data);
         return Redirect::to('/');
+        //return DB::table('users')->insertGetId($account_data);
     }
 
     public function login(Request $request)
@@ -52,9 +62,15 @@ class authController extends Controller
             'password' => $request->input('password')
         ], $request->input('remember'))){
             return "login success!!";
-        }else{
+        } else {
             return "login failed!!";
         }
     }
 
+    public function logout()
+    {
+        Auth::logout();
+        session()->flush();
+        return Redirect::to('/');
+    }
 }

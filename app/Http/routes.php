@@ -14,8 +14,15 @@
 Route::get('test', 'test@testDB');
 
 
-Route::get('/', 'home@index');
+Route::get('/', 'home@login');
+Route::get('/register/{status}', 'home@register');
 
-Route::post('auth/login', 'Auth\authController@login');
-Route::get('auth/register', 'Auth\authController@register');
-Route::get('auth/logout', 'Auth\authController@logout');
+Route::group(['prefix' => 'auth'], function() {
+    Route::post('login', 'Auth\authController@login');
+    Route::post('register', 'Auth\authController@register');
+    Route::get('logout', 'Auth\authController@logout');
+});
+
+Route::group(['prefix' => 'api'], function() {
+    Route::get('getAccount', 'Auth\authController@getAccount');
+});
