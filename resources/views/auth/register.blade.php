@@ -20,12 +20,9 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="card-content black-text center-align">
-                                            <h1 class="card-title">Sign up</h1>
+                                            <h1 class="card-title">Create your account</h1>
                                         </div>
                                         <form class="form">
-                                            @if ($status == 1)
-                                                <h3 class="center color-red">輸入格式錯誤</h3>
-                                            @endif
                                             <div class="input-field">
                                                 <i class="material-icons prefix">comment</i>
                                                 <input type="text" id="Name" name="name" class="form__input">
@@ -59,7 +56,7 @@
                 </div>
             </form>
             <div class="center">
-                <a href="{{url('/')}}">
+                <a href="{{url('/login')}}">
                     <span>Sign in</span>
                 </a>
             </div>
@@ -71,5 +68,6 @@
 @endsection
 
 @section("js")
+    <script>var STATUS = "{{$status}}";</script>
     <script src="{{url('/assets/js/register.js')}}"></script>
 @endsection

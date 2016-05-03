@@ -46,7 +46,7 @@
 
             </form>
             <div class="center">
-                <a href="{{url('/register/0')}}">
+                <a href="{{url('/register')}}">
                     <span>Sign up</span>
                 </a>
             </div>
@@ -56,4 +56,6 @@
 @endsection
 
 @section("js")
+    <script>var STATUS = "{{$status}}";</script>
+    <script src="{{url('/assets/js/login.js')}}"></script>
 @endsection

@@ -41,10 +41,17 @@ class authController extends Controller
         $list_account = authController::getAccount();
         $isExist = array_search($request->input('account'), $list_account);
 
-        if($request->input('password') != $request->input('confirm_password')
-            || $request->input('password') == ""
+        /*if($request->input('password') != $request->input('confirm_password')
+            || $request->input('password') == "" || $request->input('name') == "" || $request->input('account') == ""
             || $isExist !== FALSE) {
             return Redirect::to('/register/1');
+        }*/
+        if($request->input('account') == "" || $request->input('password') == "" || $request->input('name') == "") {
+            return Redirect::to('/register/1');
+        } else if($isExist !== FALSE) {
+            return Redirect::to('/register/2');
+        } else if($request->input('password') != $request->input('confirm_password')) {
+            return Redirect::to('/register/3');
         }
 
         $account_data['account'] = $request->input('account');
@@ -61,9 +68,20 @@ class authController extends Controller
             'account' => $request->input('account'),
             'password' => $request->input('password')
         ], $request->input('remember'))){
-            return "login success!!";
+            Auth::user()->types = 0;
+            return Redirect::to('/');
         } else {
-            return "login failed!!";
+            $list_account = authController::getAccount();
+            $isExist = array_search($request->input('account'), $list_account);
+
+            if($request->input('account') == "" || $request->input('password') == "") {
+                return Redirect::to('/login/1');
+            } else if($isExist === FALSE) {
+                return Redirect::to('/login/2');
+            } else {
+                return Redirect::to('/login/3');
+            }
+            //return "login failed!!";
         }
     }
 

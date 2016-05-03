@@ -12,10 +12,14 @@
 */
 
 Route::get('test', 'test@testDB');
+Route::group(['prefix' => 'apii', 'middleware' => 'role:user'], function(){
+    Route::get('getAccount', 'Auth\authController@getAccount');
+});
 
 
-Route::get('/', 'home@login');
-Route::get('/register/{status}', 'home@register');
+Route::get('/', 'home@index');
+Route::get('/login/{status?}', 'home@login');
+Route::get('/register/{status?}', 'home@register');
 
 Route::group(['prefix' => 'auth'], function() {
     Route::post('login', 'Auth\authController@login');
