@@ -46,14 +46,20 @@
                             <span class="s3 col left-align">{{$articleData[$i]->created_at}}</span>
                             <span class="s2 col left-align">{{$articleData[$i]->name}}</span>
                             <span class="s2 col left-align">{{$articleData[$i]->title}}</span>
-                            <span class="s2 col center">{{count($articleData[$i]->reply)}}</span>
+                            <span class="s2 col">
+                                <span class="chip">
+                                    {{count($articleData[$i]->reply)}}
+                                </span>
+                            </span>
                             <span class="s3 col left-align">{{$articleData[$i]->latestDate}}</span>
                         </div>
                         <div class="collapsible-body row">
                             <div class="article_content s12 col">
                                 <p class="content left-align">
-                                    {{$articleData[$i]->content}}
                                     <a class="single_page_link" href="article/{{$articleData[$i]->id}}"><i class="material-icons right">input</i></a>
+                                    @for($k=0; $k<strlen($articleData[$i]->content); $k++)<!--
+                                        -->@if($articleData[$i]->content[$k] == "\n")<br>@else{{$articleData[$i]->content[$k]}}@endif<!--
+                                    -->@endfor
                                 </p>
                             </div>
                             <div class="input-field s12 col">
@@ -68,7 +74,11 @@
                                     <p class="row">
                                         <span class="author s1 col left-align">{{$articleData[$i]->reply[$j]->name}}</span>
                                         <span class="reply_content s8 col left-align">
-                                            {{$articleData[$i]->reply[$j]->content}}
+                                            <span>
+                                                @for($k=0; $k<strlen($articleData[$i]->reply[$j]->content); $k++)<!--
+                                                    -->@if($articleData[$i]->reply[$j]->content[$k] == "\n")<br>@else{{$articleData[$i]->reply[$j]->content[$k]}}@endif<!--
+                                                -->@endfor
+                                            </span>
                                         </span>
                                         <span class="s3 col right-align">{{$articleData[$i]->reply[$j]->created_at}}</span>
                                     </p>

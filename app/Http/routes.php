@@ -18,6 +18,7 @@ Route::group(['prefix' => 'apii', 'middleware' => 'role:user'], function(){
 
 
 Route::get('/', 'home@index');
+Route::get('/article/{id}', 'home@article');
 Route::get('/login/{status?}', 'home@login');
 Route::get('/register/{status?}', 'home@register');
 

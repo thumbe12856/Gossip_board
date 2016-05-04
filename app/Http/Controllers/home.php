@@ -27,6 +27,11 @@ class home extends BaseController
         }
     }
 
+    function article($id)
+    {
+        return view('article');
+    }
+
     function login($status = null)
     {
         return view('auth/login')->with('status', $status);
