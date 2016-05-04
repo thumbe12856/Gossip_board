@@ -41,11 +41,6 @@ class authController extends Controller
         $list_account = authController::getAccount();
         $isExist = array_search($request->input('account'), $list_account);
 
-        /*if($request->input('password') != $request->input('confirm_password')
-            || $request->input('password') == "" || $request->input('name') == "" || $request->input('account') == ""
-            || $isExist !== FALSE) {
-            return Redirect::to('/register/1');
-        }*/
         if($request->input('account') == "" || $request->input('password') == "" || $request->input('name') == "") {
             return Redirect::to('/register/1');
         } else if($isExist !== FALSE) {
@@ -81,7 +76,6 @@ class authController extends Controller
             } else {
                 return Redirect::to('/login/3');
             }
-            //return "login failed!!";
         }
     }
 

@@ -1,5 +1,5 @@
+var accountData;
 $(document).ready(function() {
-    var accountData;
     $.ajax({
         url: '/api/getAccount',
         type: "GET",
@@ -10,6 +10,7 @@ $(document).ready(function() {
         success: function(data)
         {
             accountData = data;
+            BindEvent();
         }
     });
 
@@ -25,7 +26,10 @@ $(document).ready(function() {
         Materialize.toast(toastContent, 5000, 'rounded');
         $('#main #toast-container .toast').addClass('toast-error');
     }
+});
 
+function BindEvent()
+{
     $('#register #confirm_password, #register #password').keyup(function(){
         if($(this).val() !== $('#password').val()) {
             $('#confirm_password').addClass('error')
@@ -45,4 +49,4 @@ $(document).ready(function() {
                 .parent().find('.material-icons, label').removeClass('color-red');
         }
     });
-});
+}

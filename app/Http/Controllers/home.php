@@ -19,11 +19,9 @@ class home extends BaseController
     {
         if (Auth::check())
         {
-            $user = Auth::user();
-            $id = $user->id;
-            $data = DB::table('test')->get();
+            $article_data = articleController::get();
             return view('index')
-                ->with('data', $data);
+                ->with('articleData', $article_data);
         } else {
             return Redirect::to('/login');
         }

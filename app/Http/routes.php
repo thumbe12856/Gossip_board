@@ -29,4 +29,14 @@ Route::group(['prefix' => 'auth'], function() {
 
 Route::group(['prefix' => 'api'], function() {
     Route::get('getAccount', 'Auth\authController@getAccount');
+
+    Route::group(['prefix' => 'article'], function() {
+        Route::post('create', 'articleController@create');
+        Route::get('get', 'articleController@get');
+    });
+
+    Route::group(['prefix' => 'reply'], function() {
+        Route::post('create', 'replyController@create');
+        Route::get('get', 'replyController@get');
+    });
 });
