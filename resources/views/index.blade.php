@@ -72,35 +72,6 @@
         </ul>
     </div>
 
-
-    <!-- create article modal -->
-    <div id="create_article_modal" class="modal">
-        <div class="modal-content">
-            <div class="row">
-                <div class="col s12">
-                    <div class="input-field col s11">
-                        <i class="material-icons prefix">subtitles</i>
-                        <input id="create_article_title" type="text" class="validate">
-                        <label for="create_article_title">Title</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col s12">
-                    <div class="input-field col s11">
-                        <i class="material-icons prefix">translate</i>
-                        <textarea id="create_article_content" class="materialize-textarea"></textarea>
-                        <label for="create_article_content">Content</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <a id="check_create_article" class=" modal-action modal-close waves-effect waves-green btn-flat">Done<i class="material-icons right">send</i></a>
-        </div>
-    </div>
-
 @endsection
 
 @section("js")
