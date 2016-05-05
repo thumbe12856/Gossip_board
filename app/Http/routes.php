@@ -21,6 +21,7 @@ Route::get('/', 'home@index');
 Route::get('/article/{id}', 'home@article');
 Route::get('/login/{status?}', 'home@login');
 Route::get('/register/{status?}', 'home@register');
+Route::get('/recentArticle', 'home@recent');
 
 Route::group(['prefix' => 'auth'], function() {
     Route::post('login', 'Auth\authController@login');
@@ -32,12 +33,16 @@ Route::group(['prefix' => 'api'], function() {
     Route::get('getAccount', 'Auth\authController@getAccount');
 
     Route::group(['prefix' => 'article'], function() {
+        Route::get('get', 'articleController@get');//debug
+        Route::get('getSingle/{id}', 'articleController@getSingle');//debug
+        Route::get('getRecent', 'articleController@getRecent');//debug
         Route::post('create', 'articleController@create');
-        Route::get('get', 'articleController@get');
+        Route::post('update', 'articleController@update');
+        Route::post('delete', 'articleController@delete');
     });
 
     Route::group(['prefix' => 'reply'], function() {
         Route::post('create', 'replyController@create');
-        Route::get('get', 'replyController@get');
+        Route::get('get', 'replyController@get');//debug
     });
 });

@@ -18,12 +18,15 @@ use Illuminate\Http\Request;
 
 class articleController extends Controller
 {
-    static function get()
+    static function get($join_index, $relation, $join_data)
     {
         if(Auth::check()) {
             $articleData = DB::table('articles')
                 ->join('users', 'articles.uid', '=', 'users.id')
                 ->select('articles.*', 'users.name')
+                ->where('articles.status', 0)
+                ->where($join_index, $relation, $join_data)
+                ->orderBy('articles.created_at', 'desc')
                 ->get();
             $replyData = replyController::get();
 
@@ -41,9 +44,20 @@ class articleController extends Controller
                 }
                 $articleData[$j]->latestDate = $latestDate;
             }
+
+            for($j = 0; $j < count($articleData); $j++) {
+                for($i = 0; $i < count($articleData); $i++) {
+                    if($articleData[$j]->latestDate > $articleData[$i]->latestDate) {
+                        $temp = $articleData[$j];
+                        $articleData[$j] = $articleData[$i];
+                        $articleData[$i] = $temp;
+                    }
+                }
+            }
+
             return $articleData;
         } else {
-            return 1;//error page
+            return Redirect::to('/');
         }
     }
 
@@ -57,7 +71,48 @@ class articleController extends Controller
             DB::table('articles')->insert($article_data);
             return 0;
         } else {
-            return 1;//error page
+            return Redirect::to('/');
+        }
+    }
+
+    static function update(Request $request)
+    {
+        if(Auth::check()) {
+            $aid = $request->input('aid');
+            $articleInf = self::get('articles.id', '=', $aid);
+            if($articleInf[0]->uid == Auth::user()->id) {
+                $article_data['title'] = $request->input('title');
+                $article_data['content'] = $request->input('content');
+                $article_data['updated_at'] = DB::raw('CURRENT_TIMESTAMP');
+                $article_data['status'] = 0;
+                DB::table('articles')
+                    ->where('id', $aid)
+                    ->update($article_data);
+                return 0;
+            } else {
+                return 1;
+            }
+        } else {
+            return Redirect::to('/');
+        }
+    }
+
+    static function delete(Request $request)
+    {
+        if(Auth::check()) {
+            $aid = $request->input('aid');
+            $articleInf = self::get('articles.id', '=', $aid);
+            if($articleInf[0]->uid == Auth::user()->id) {
+                $article_data['status'] = 1;
+                DB::table('articles')
+                    ->where('id', $aid)
+                    ->update($article_data);
+                return 0;
+            } else {
+                return 1;
+            }
+        } else {
+            return Redirect::to('/');
         }
     }
 }

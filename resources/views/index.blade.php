@@ -1,31 +1,12 @@
-@extends("init")
+@extends("index_init")
 
 @section("css")
     <title>Gossip Board</title>
-    <link href="{{url('/assets/css/index.css')}}" rel="stylesheet" type="text/css">
-    <link href="/assets/css/general.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/index.css" rel="stylesheet" type="text/css">
 @endsection
 
 
-@section("content")
-    <nav id="index_nav">
-        <div class="nav-wrapper">
-            <i id="show_side_nav" class="material-icons left">view_list</i>
-            <a href="/" class="brand-logo center">Gossip Board</a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a class="dropdown-button" href="#!" data-activates="logoutDropdown">Hello {{Auth::user()->name}}!<i class="material-icons right">arrow_drop_down</i></a></li>
-            </ul>
-        </div>
-        <ul id="logoutDropdown" class="dropdown-content">
-            <li><a class="modal-trigger" href="#create_article_modal">發表新主題</a></li>
-
-
-            <li><a href="#">所有文章列表</a></li>
-            <li><a href="#">您近期更新/<br/>被留言的文章</a></li>
-            <li class="divider"></li>
-            <li><a href="/auth/logout">Logout</a></li>
-        </ul>
-    </nav>
+@section("index_content")
 
     <div id="index_container" class="center container">
         <br/><br/>
@@ -72,8 +53,8 @@
                             <div class="reply_record s12 col">
                                 @for($j=0; $j<count($articleData[$i]->reply); $j++)
                                     <p class="row">
-                                        <span class="author s1 col left-align">{{$articleData[$i]->reply[$j]->name}}</span>
-                                        <span class="reply_content s8 col left-align">
+                                        <span class="author s2 col left-align">{{$articleData[$i]->reply[$j]->name}}</span>
+                                        <span class="reply_content s7 col left-align">
                                             <span>
                                                 @for($k=0; $k<strlen($articleData[$i]->reply[$j]->content); $k++)<!--
                                                     -->@if($articleData[$i]->reply[$j]->content[$k] == "\n")<br>@else{{$articleData[$i]->reply[$j]->content[$k]}}@endif<!--
@@ -120,16 +101,8 @@
         </div>
     </div>
 
-
-    <!--side nav-->
-    <ul id="side_nav" class="side-nav fixed" style="transform: translateX(0px);">
-        <li class="bold"><a href="about.html" class="waves-effect waves-teal">所有文章列表</a></li>
-        <li class="bold"><a href="getting-started.html" class="waves-effect waves-teal">您近期更新/被留言的文章 Started</a></li>
-    </ul>
-    <div id="hide_side_nav"></div>
-
 @endsection
 
 @section("js")
-    <script src="{{url('/assets/js/index.js')}}"></script>
+    <script src="/assets/js/index.js"></script>
 @endsection

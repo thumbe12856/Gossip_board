@@ -21,8 +21,11 @@ class test extends BaseController
             $user = Auth::user();
             $id = $user->id;
             $data = DB::table('test')->get();
+            $article_data = articleController::get();
             return view('test')
-                ->with('data', $data);
+                ->with('articleData', $article_data);
+            /*return view('test')
+                ->with('data', $data);*/
         }
         else
         {

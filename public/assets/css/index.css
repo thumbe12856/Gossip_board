@@ -1,3 +1,10 @@
+.chip {
+    margin-top: 5px;
+}
+
+html {
+    background: url('/assets/img/background.jpg');
+}
 #index_nav {
     background: #0d47a1
 }

@@ -1,3 +1,6 @@
+html {
+    background: url('/assets/img/background.jpg');
+}
 #article_container .card-action {
     padding-bottom: 0;
 }
@@ -7,6 +10,7 @@
 
 #article_container .card-content .card-title {
     font-size : 40px;
+    padding: 0 0.75rem;
 }
 
 #article_container .card-content .author_div {

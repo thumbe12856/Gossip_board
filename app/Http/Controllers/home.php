@@ -19,7 +19,20 @@ class home extends BaseController
     {
         if (Auth::check())
         {
-            $article_data = articleController::get();
+            $article_data = articleController::get('articles.id', '<>', 0);
+            return view('index')
+                ->with('articleData', $article_data);
+        } else {
+            return Redirect::to('/login');
+        }
+    }
+
+    function recent()
+    {
+        if (Auth::check())
+        {
+            $article_data = articleController::get('articles.uid', '=', Auth::user()->id);
+            unset($article_data[5]);
             return view('index')
                 ->with('articleData', $article_data);
         } else {
@@ -29,7 +42,14 @@ class home extends BaseController
 
     function article($id)
     {
-        return view('article');
+        if (Auth::check())
+        {
+            $article_data = articleController::get('articles.id', '=', $id);
+            return view('/article')
+                ->with('articleData', $article_data);
+        } else {
+            return Redirect::to('/');
+        }
     }
 
     function login($status = null)

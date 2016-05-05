@@ -9,7 +9,8 @@
     <!--material css-->
     <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="{{url('/assets/materialize/css/materialize.css')}}" type="text/css">
+    <link rel="stylesheet" href="/assets/materialize/css/materialize.css" type="text/css">
+    <link href="/assets/css/general.css" rel="stylesheet" type="text/css">
     @yield("css")
 </head>
 <body id="main">
@@ -23,7 +24,7 @@
 
     <!--material js-->
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js" defer></script>-->
-    <script src="{{url('/assets/materialize/js/materialize.js')}}" defer></script>
+    <script src="/assets/materialize/js/materialize.js" defer></script>
     @yield("js")
 </body>
 </html>

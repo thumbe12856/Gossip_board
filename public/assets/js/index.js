@@ -9,6 +9,7 @@ $(document).ready(function() {
     );
 
     $('#show_side_nav').on('click', function(){
+        console.log('here');
         $('#side_nav').animate({
             marginLeft: 0
         }, 500 );
@@ -37,12 +38,15 @@ $(document).ready(function() {
                     _token: $("meta[name='csrf-token']").attr("content")
                 },
                 error: function (error) {
-                    alert('伺服器错误(ajax error)');
+                    Materialize.toast('<span>server error!</span>', 5000, 'rounded');
+                    $('#main #toast-container .toast').addClass('toast-error');
                     return;
                 },
                 success: function (result) {
-                    if (result != 0) alert('ajax error!');
+                    console.log(result);
+                    if (result != 0) Materialize.toast('<span>Create fail!</span>', 5000, 'rounded');
                     else window.location = "./";
+                    $('#main #toast-container .toast').addClass('toast-error');
                 }
             });
         }
@@ -62,12 +66,13 @@ $(document).ready(function() {
                     _token: $("meta[name='csrf-token']").attr("content")
                 },
                 error: function (error) {
-                    alert('伺服器错误(ajax error)');
+                    Materialize.toast('<span>server error!</span>', 5000, 'rounded');
                     return;
                 },
                 success: function (result) {
-                    if (result != 0) alert('ajax error!');
+                    if (result != 0) Materialize.toast('<span>Create fail!</span>', 5000, 'rounded');
                     else window.location = "./";
+                    $('#main #toast-container .toast').addClass('toast-error');
                 }
             });
         }

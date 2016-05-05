@@ -20,11 +20,16 @@ class replyController extends Controller
 {
     static function get()
     {
-        $replyData = DB::table('reply')
-            ->join('users', 'reply.uid', '=', 'users.id')
-            ->select('reply.*', 'users.name')
-            ->get();
-        return $replyData;
+        if(Auth::check()) {
+            $replyData = DB::table('reply')
+                ->join('users', 'reply.uid', '=', 'users.id')
+                ->select('reply.*', 'users.name')
+                ->orderBy('reply.created_at', 'desc')
+                ->get();
+            return $replyData;
+        } else {
+            return Redirect::to('/');
+        }
     }
 
     static function create(Request $request)
@@ -34,9 +39,12 @@ class replyController extends Controller
             $reply_data['aid'] = $request->input('aid');
             $reply_data['content'] = $request->input('content');
             DB::table('reply')->insert($reply_data);
+            DB::table('articles')
+                ->where('id', $request->input('aid'))
+                ->update(['updated_at' => DB::raw('CURRENT_TIMESTAMP')]);
             return 0;
         } else {
-            return 1;//error page
+            return Redirect::to('/');
         }
     }
 }
