@@ -53,7 +53,7 @@
     <!--side nav-->
     <ul id="side_nav" class="side-nav fixed" style="transform: translateX(0px);">
         <li class="bold"><a href="/" class="waves-effect waves-light">所有文章列表</a></li>
-        <li class="bold"><a href="recentArticle" class="waves-effect waves-light ">您近期更新/被留言的文章 Started</a></li>
+        <li class="bold"><a href="/recentArticle" class="waves-effect waves-light ">您近期更新/被留言的文章 Started</a></li>
     </ul>
     <div id="hide_side_nav"></div>
 
