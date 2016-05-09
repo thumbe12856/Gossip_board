@@ -34,9 +34,21 @@
                         <div class="card-content row">
                             <div class="article_content s12 col">
                                 <p>
-                                    @for($k=0; $k<strlen($articleData[0]->content); $k++)<!--
-                                        -->@if($articleData[0]->content[$k] == "\n")<br>@else{{$articleData[0]->content[$k]}}@endif<!--
-                                    -->@endfor
+                                    <?php
+                                        $str = ($articleData[0]->content);
+                                        $token = strtok($str, "\n");
+                                        while ($token !== false)
+                                        {
+                                            $len = preg_match_all('/(\w+)|(.)/u', $token, $matches);
+                                            for($k=0; $k<$len; $k++)
+                                            {
+                                                echo    htmlspecialchars($matches[0][$k]);
+                                            }
+                                            echo "<br/>";
+
+                                            $token = strtok("\n");
+                                        }
+                                    ?>
                                 </p>
                             </div>
                             <div class="input-field s12 col">
@@ -51,9 +63,21 @@
                                         <span class="author s2 col right-align">{{$articleData[0]->reply[$j]->name}}</span>
                                         <span class="reply_content s7 col left-align">
                                             <span>
-                                                @for($k=0; $k<strlen($articleData[0]->reply[$j]->content); $k++)<!--
-                                                    -->@if($articleData[0]->reply[$j]->content[$k] == "\n")<br>@else{{$articleData[0]->reply[$j]->content[$k]}}@endif<!--
-                                                -->@endfor
+                                                <?php
+                                                    $str = ($articleData[0]->reply[$j]->content);
+                                                    $token = strtok($str, "\n");
+                                                    while ($token !== false)
+                                                    {
+                                                        $len = preg_match_all('/(\w+)|(.)/u', $token, $matches);
+                                                        for($k=0; $k<$len; $k++)
+                                                        {
+                                                            echo    htmlspecialchars($matches[0][$k]);
+                                                        }
+                                                        echo "<br/>";
+
+                                                        $token = strtok("\n");
+                                                    }
+                                                ?>
                                             </span>
                                         </span>
                                         <span class="s3 col right-align">{{$articleData[0]->reply[$j]->created_at}}</span>
