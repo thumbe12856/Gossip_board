@@ -36,8 +36,6 @@ class articleController extends Controller
                 $articleData[$j]->reply = [];
                 for ($i = 0; $i < count($replyData); $i++) {
                     if($replyData[$i]->aid == $articleData[$j]->id) {
-                        /*for($k = 0; $k<strlen($replyData[$i]->content); $k++)
-                            if($replyData[$i]->content[$k] == "\n") $replyData[$i]->content[$k] = -1;*/
                         array_push($articleData[$j]->reply, $replyData[$i]);
                         if($latestDate < $replyData[$i]->created_at) $latestDate = $replyData[$i]->created_at;
                     }

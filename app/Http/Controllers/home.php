@@ -32,7 +32,8 @@ class home extends BaseController
         if (Auth::check())
         {
             $article_data = articleController::get('articles.uid', '=', Auth::user()->id);
-            unset($article_data[5]);
+	    $len = count($article_data);
+	    for($i=5; $i<$len; $i++) unset($article_data[$i]);
             return view('index')
                 ->with('articleData', $article_data);
         } else {
