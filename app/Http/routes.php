@@ -33,9 +33,6 @@ Route::group(['prefix' => 'api'], function() {
     Route::get('getAccount', 'Auth\authController@getAccount');
 
     Route::group(['prefix' => 'article'], function() {
-        Route::get('get', 'articleController@get');//debug
-        Route::get('getSingle/{id}', 'articleController@getSingle');//debug
-        Route::get('getRecent', 'articleController@getRecent');//debug
         Route::post('create', 'articleController@create');
         Route::post('update', 'articleController@update');
         Route::post('delete', 'articleController@delete');
@@ -43,6 +40,5 @@ Route::group(['prefix' => 'api'], function() {
 
     Route::group(['prefix' => 'reply'], function() {
         Route::post('create', 'replyController@create');
-        Route::get('get', 'replyController@get');//debug
     });
 });
