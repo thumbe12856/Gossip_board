@@ -7,7 +7,6 @@
     <link rel="shortcut icon" type="image/png" href="/favicon.png" />
 
     <!--material css-->
-    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="/assets/materialize/css/materialize.css" type="text/css">
     <link href="/assets/css/general.css" rel="stylesheet" type="text/css">
@@ -23,7 +22,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dustjs-linkedin/2.7.2/dust-core.min.js" defer></script>
 
     <!--material js-->
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js" defer></script>-->
     <script src="/assets/materialize/js/materialize.js" defer></script>
     @yield("js")
 </body>
